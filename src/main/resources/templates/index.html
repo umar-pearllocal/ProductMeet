@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="animation">
+    <h1>Welcome <span th:text="${name}"></span></h1>
+</div>
+<form action="/" method="get">
+    <input type="text" name="name" placeholder="Enter your name">
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>

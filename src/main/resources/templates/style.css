@@ -1,0 +1,13 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 20%;
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+}
+.animation h1 {
+    animation: fadeIn 3s infinite alternate;
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

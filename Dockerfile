@@ -6,5 +6,5 @@ RUN mvn clean package -DskipTests
 
 FROM openjdk:17-jdk-alpine
 WORKDIR /app
-COPY target/forproductmeet-*.jar app.jar
+COPY --from=build /app/target/*.jar app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]

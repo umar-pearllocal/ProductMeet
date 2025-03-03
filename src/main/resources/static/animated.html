@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DVD Animation</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .animation {
+            position: absolute;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            font-size: 2em;
+            text-align: center;
+            border-radius: 10px;
+            white-space: nowrap; /* Prevent text from wrapping */
+            cursor: pointer; /* Indicate clickable element */
+        }
+    </style>
+</head>
+<body>
+<div class="animation">
+    <h1>Welcome <span th:text="${name}"></span></h1>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const box = document.querySelector(".animation");
+        let dx = 2, dy = 2;
+        let x = (window.innerWidth - box.clientWidth) / 2;
+        let y = (window.innerHeight - box.clientHeight) / 2;
+        let clickCount = 0;
+        let lastClickTime = 0;
+
+        function move() {
+            x += dx;
+            y += dy;
+
+            if (x + box.clientWidth >= window.innerWidth || x <= 0) {
+                dx = -dx;
+                changeColor();
+            }
+
+            if (y + box.clientHeight >= window.innerHeight || y <= 0) {
+                dy = -dy;
+                changeColor();
+            }
+
+            box.style.left = x + "px";
+            box.style.top = y + "px";
+
+            requestAnimationFrame(move);
+        }
+
+        function changeColor() {
+            const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+            box.style.backgroundColor = randomColor;
+        }
+
+        box.addEventListener("click", () => {
+            const currentTime = new Date().getTime();
+
+            if (currentTime - lastClickTime < 250) {
+                clickCount++;
+            } else {
+                clickCount = 1; // Reset if clicks are too far apart
+            }
+            lastClickTime = currentTime;
+
+            if (clickCount === 7) {
+                window.location.href = "/game.html";
+            }
+        });
+
+        move();
+    });
+</script>
+</body>
+</html>
